@@ -17,9 +17,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'Id') ?>
 
-    <?= $form->field($model, 'Discription') ?>
+    <?= $form->field($model, 'Description') ?>
 
-    <?= $form->field($model, 'Suplier') ?>
+    <?= $form->field($model, 'Supplier') ?>
 
     <?= $form->field($model, 'Administrator_Id') ?>
 
@@ -27,9 +27,13 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'Time') ?>
 
+    <?php // echo $form->field($model, 'Item_name') ?>
+
     <?php // echo $form->field($model, 'Item_Id') ?>
 
     <?php // echo $form->field($model, 'Quantity') ?>
+
+    <?php // echo $form->field($model, 'Buying_price') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

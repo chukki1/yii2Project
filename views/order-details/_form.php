@@ -14,9 +14,10 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'order_Id')->textInput() ?>
 
-    <?= $form->field($model, 'product_id')->textInput() ?>
-
-    <?= $form->field($model, 'Product_Name')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'Product_Name')->widget(\kartik\select2\Select2::className(), [
+            'data' => \yii\helpers\ArrayHelper::map(\app\models\Product::find()->all(), "Name", "Name")
+        ]
+    ) ?>
 
     <?= $form->field($model, 'Quantity')->textInput() ?>
 

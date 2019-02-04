@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\ProductQty;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -76,8 +77,8 @@ class SiteController extends Controller
 
             $list = Yii::$app->db->createCommand("select Id,Name,Price from product")->queryAll();
 
-            return $this->render('cashierDashboard', ['list' => $list]);
-            //return $this->render('adminDashboard');
+            //return $this->render('cashierDashboard', ['list' => $list]);
+            return $this->render('adminDashboard');
         } else {
             return $this->redirect(['/user-management/auth/login']);
         }
@@ -136,7 +137,6 @@ class SiteController extends Controller
         ]);
     }
 
-  
 
     /**
      * Displays about page.
@@ -218,13 +218,15 @@ class SiteController extends Controller
                 $invoiceHasProduct->Total = $item->Total;
                 $invoiceHasProduct->Quantity = $item->quantity;
                 if (!$invoiceHasProduct->save()) {
+                   $quan = ProductQty::model()->find("product_id =: $item->product_id");
+                    $quan->Available_Qty -= $item->quantity;
+                    $quan->save();
                     return json_encode(['error' => $invoiceHasProduct->getErrors()]);
                 }
                 ProductList::deleteAll();
             }
             return json_encode(['success' => true]);
-        } 
-        else {
+        } else {
             return json_encode(['error' => $invoice->getErrors()]);
         }
     }
@@ -236,6 +238,23 @@ class SiteController extends Controller
             INNER JOIN product P ON P.Id = PL.product_id")->queryAll();
         echo json::encode($list);
 
+    }
+
+    public function actionSalesReport()
+    {
+        return $this->render('salesReport');
+    }
+
+    public function actionSreport()
+    {
+        $dateFrom = $_POST['dateFrom'];
+        $dateTo = $_POST['dateTo'];
+
+        $query = "SELECT a.*, b.* FROM invoice_has_product a INNER JOIN (SELECT * FROM invoice WHERE invoice.Date BETWEEN '$dateFrom' AND '$dateTo') b WHERE a.Invoice_Id = b.Id";
+
+        $result = Yii::$app->db->createCommand($query)->queryAll();
+
+        return json_encode(['result' => $result]);
     }
 
 

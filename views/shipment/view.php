@@ -30,14 +30,15 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'Id',
+            'Description:ntext',
+            'Supplier',
+            'Administrator_Id',
             'Date',
             'Time',
-            'Discription:ntext',
-            'Suplier',
+            'Item_name',
             'Item_Id',
             'Quantity',
-            'Administrator_Id',
-
+            'Buying_price',
         ],
     ]) ?>
 

@@ -5,22 +5,24 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "cashier".
+ * This is the model class for table "administrator".
  *
  * @property int $Id
  * @property string $Name
  * @property string $Email
  * @property string $Password
  * @property int $User_type_Id
+ *
+ * @property Shipment[] $shipments
  */
-class AddUser extends \yii\db\ActiveRecord
+class Administrator extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'cashier';
+        return 'administrator';
     }
 
     /**
@@ -32,9 +34,8 @@ class AddUser extends \yii\db\ActiveRecord
             [['Name', 'Password', 'User_type_Id'], 'required'],
             [['User_type_Id'], 'integer'],
             [['Name', 'Email', 'Password'], 'string', 'max' => 45],
-            ['Email','email'],
             [['Name'], 'unique'],
-            [['Password'], 'validatePassword'],
+            [['Password'], 'unique'],
         ];
     }
 
@@ -51,12 +52,12 @@ class AddUser extends \yii\db\ActiveRecord
             'User_type_Id' => 'User Type  ID',
         ];
     }
-    public function validatePassword()
-    {
-        $user = User::findByUsername($this->Name);
 
-        if (!$user || !$user->validatePassword($this->Password)) {
-            $this->addError('Password', 'Incorrect username or password.');
-        }
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getShipments()
+    {
+        return $this->hasMany(Shipment::className(), ['Administrator_Id' => 'Id']);
     }
 }

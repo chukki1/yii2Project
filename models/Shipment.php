@@ -8,13 +8,18 @@ use Yii;
  * This is the model class for table "shipment".
  *
  * @property int $Id
- * @property string $Discription
- * @property string $Suplier
+ * @property string $Description
+ * @property string $Supplier
  * @property int $Administrator_Id
  * @property string $Date
  * @property string $Time
- * @property string $Item_Id
+ * @property string $Item_name
+ * @property int $Item_Id
  * @property int $Quantity
+ * @property double $Buying_price
+ *
+ * @property Administrator $administrator
+ * @property Product $item
  */
 class Shipment extends \yii\db\ActiveRecord
 {
@@ -32,12 +37,15 @@ class Shipment extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['Discription'], 'string'],
-            [['Administrator_Id', 'Date', 'Time', 'Item_Id', 'Quantity'], 'required'],
-            [['Administrator_Id', 'Quantity'], 'integer'],
+            [['Description'], 'string'],
+            [['Administrator_Id', 'Date', 'Time', 'Item_name', 'Item_Id', 'Quantity', 'Buying_price'], 'required'],
+            [['Administrator_Id', 'Item_Id', 'Quantity'], 'integer'],
             [['Date', 'Time'], 'safe'],
-            [['Suplier'], 'string', 'max' => 45],
-            [['Item_Id'], 'string', 'max' => 30],
+            [['Buying_price'], 'number'],
+            [['Supplier'], 'string', 'max' => 45],
+            [['Item_name'], 'string', 'max' => 100],
+            [['Administrator_Id'], 'exist', 'skipOnError' => true, 'targetClass' => Administrator::className(), 'targetAttribute' => ['Administrator_Id' => 'Id']],
+            [['Item_Id'], 'exist', 'skipOnError' => true, 'targetClass' => Product::className(), 'targetAttribute' => ['Item_Id' => 'Id']],
         ];
     }
 
@@ -48,13 +56,31 @@ class Shipment extends \yii\db\ActiveRecord
     {
         return [
             'Id' => 'ID',
-            'Discription' => 'Discription',
-            'Suplier' => 'Suplier',
+            'Description' => 'Description',
+            'Supplier' => 'Supplier',
             'Administrator_Id' => 'Administrator  ID',
             'Date' => 'Date',
             'Time' => 'Time',
+            'Item_name' => 'Item Name',
             'Item_Id' => 'Item  ID',
             'Quantity' => 'Quantity',
+            'Buying_price' => 'Buying Price',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAdministrator()
+    {
+        return $this->hasOne(Administrator::className(), ['Id' => 'Administrator_Id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getItem()
+    {
+        return $this->hasOne(Product::className(), ['Id' => 'Item_Id']);
     }
 }

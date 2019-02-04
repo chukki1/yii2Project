@@ -17,8 +17,9 @@ class ShipmentSearch extends Shipment
     public function rules()
     {
         return [
-            [['Id', 'Administrator_Id', 'Quantity'], 'integer'],
-            [['Discription', 'Suplier', 'Date', 'Time', 'Item_Id'], 'safe'],
+            [['Id', 'Administrator_Id', 'Item_Id', 'Quantity'], 'integer'],
+            [['Description', 'Supplier', 'Date', 'Time', 'Item_name'], 'safe'],
+            [['Buying_price'], 'number'],
         ];
     }
 
@@ -62,12 +63,14 @@ class ShipmentSearch extends Shipment
             'Administrator_Id' => $this->Administrator_Id,
             'Date' => $this->Date,
             'Time' => $this->Time,
+            'Item_Id' => $this->Item_Id,
             'Quantity' => $this->Quantity,
+            'Buying_price' => $this->Buying_price,
         ]);
 
-        $query->andFilterWhere(['like', 'Discription', $this->Discription])
-            ->andFilterWhere(['like', 'Suplier', $this->Suplier])
-            ->andFilterWhere(['like', 'Item_Id', $this->Item_Id]);
+        $query->andFilterWhere(['like', 'Description', $this->Description])
+            ->andFilterWhere(['like', 'Supplier', $this->Supplier])
+            ->andFilterWhere(['like', 'Item_name', $this->Item_name]);
 
         return $dataProvider;
     }

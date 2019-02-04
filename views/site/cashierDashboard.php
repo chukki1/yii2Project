@@ -68,7 +68,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         <input type="text" class="form-control" placeholder="Date" value="<?php echo date("Y-m-d"); ?>">
                     </div>
                     <div class="col-md-2">
-                        <input type="text" class="form-control" placeholder="Time">
+                        <input type="text" class="form-control" placeholder="Time" value="<?php echo date("h:i:sa");?>">
                     </div>
                     <div class="col-md-2">
                         <input type="text" class="form-control" id="Customer_Id" placeholder="Customer Id">
@@ -428,4 +428,7 @@ $this->params['breadcrumbs'][] = $this->title;
     $("#paidInput").change(function () {
         alert("The text has been changed.");
     });
+    
+    
+
 </script>

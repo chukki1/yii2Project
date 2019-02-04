@@ -5,6 +5,8 @@ namespace app\controllers;
 use Yii;
 use app\models\Order;
 use app\models\OrderSearch;
+use app\models\OrderDetails;
+use app\models\OrderDetailsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -52,9 +54,13 @@ class OrderController extends Controller
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionView($ID, $Customer_Id)
-    {
+    {      $modelOrderDetails =new OrderDetails();
+       $model2 = OrderDetails::find()->where( 'Id'
+        )->One();
+      
         return $this->render('view', [
             'model' => $this->findModel($ID, $Customer_Id),
+            'modelOrderDetails'=>$model2,
         ]);
     }
 
@@ -66,13 +72,14 @@ class OrderController extends Controller
     public function actionCreate()
     {
         $model = new Order();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+         $modelOrderDetails =new OrderDetails();
+        if ($model->load(Yii::$app->request->post()) &&$modelOrderDetails->load(Yii::$app->request->post()) && $model->save()&&$modelOrderDetails->save()) {
             return $this->redirect(['view', 'ID' => $model->ID, 'Customer_Id' => $model->Customer_Id]);
         }
 
         return $this->render('create', [
             'model' => $model,
+            'modelOrderDetails' =>$modelOrderDetails,
         ]);
     }
 

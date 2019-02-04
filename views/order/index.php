@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
             return [
                 'style' => "cursor: pointer",
                 'id' => $model['ID'],
-                'onclick' => 'location.href="'.Yii::$app->urlManager->createUrl('order-details').'&scenario=Order&params="+($order_Id);',
+                'onclick=location.href' => Yii::$app->urlManager->createUrl(['order-details','Id' => $model->ID]),
                
             ];  
         },

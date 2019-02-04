@@ -12,11 +12,11 @@ use yii\helpers\Url;
         .sidebar{
             background-color:black;
             padding:10px 10px 10px 20px;
-            height: auto;
+
         }
         body {
-            padding:3px 0px 10px 10px;
-           
+            padding:3px 0px 0px 2px;
+            height: auto;
         }
     </style>
 </head>
@@ -51,7 +51,7 @@ use yii\helpers\Url;
                     <li><?= Html::a('<i class="	fa fa-file-text"></i> Shipment',['/shipment/index'])?> </li>
                     <li><?= Html::a('<i class="	fa fa-address-card"></i> User Manegment',['/add-user/index'])?> </li>
                     <li><?= Html::a('<i class="fa fa-shopping-cart"></i> Add Item',['/product/index'])?> </li>
-                    <li><?= Html::a('<i class="fa fa-shopping-bag"></i> Item Categorize',['/site/index'])?></li>
+                    <li><?= Html::a('<i class="fa fa-shopping-bag"></i> Item Categorize',['/main-category/index'])?></li>
                     <li><?= Html::a('<i class="fa fa-file"></i> Sales Report',['/site/sales-report'])?></li>
                     <li><?= Html::a('<i class="fa fa-envelope"></i> Delivery Note',['/delevery-note/index'])?> </li>
 
