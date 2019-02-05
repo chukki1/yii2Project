@@ -10,14 +10,12 @@ use yii\helpers\Url;
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
         .sidebar{
-            background-color:black;
+            background-color:#f5f5f5;
             padding:10px 10px 10px 20px;
+            height:100vh;
 
         }
-        body {
-            padding:3px 0px 0px 2px;
-            height: auto;
-        }
+       
     </style>
 </head>
 <body>
@@ -44,18 +42,22 @@ use yii\helpers\Url;
                 <!-- sidebar menu: : style can be found in sidebar.less -->
                 <ul class="sidebar-menu" data-widget="tree">
                     <li class="header">MAIN NAVIGATION</li>
-
-                    <li><?= Html::a('<i class="fa fa-file"></i> Create Invoices',['/site/index'])?></li>
-                    <li><?= Html::a('<i class="fa fa-cart-plus"></i> Online Orders',['/site/index'])?> </li>
-                    <li><?= Html::a('<i class="fa fa-user-plus"></i> Add Customers',['/customer/index'])?></li>
+                    <?if(Yii::$app->user->identity->id == 1):?>
                     <li><?= Html::a('<i class="	fa fa-file-text"></i> Shipment',['/shipment/index'])?> </li>
-                    <li><?= Html::a('<i class="	fa fa-address-card"></i> User Manegment',['/add-user/index'])?> </li>
+                    <li><?= Html::a('<i class="	fa fa-address-card"></i> User Manegment',['/user-management/user/create'])?> </li>
                     <li><?= Html::a('<i class="fa fa-shopping-cart"></i> Add Item',['/product/index'])?> </li>
                     <li><?= Html::a('<i class="fa fa-shopping-bag"></i> Item Categorize',['/main-category/index'])?></li>
                     <li><?= Html::a('<i class="fa fa-file"></i> Sales Report',['/site/sales-report'])?></li>
                     <li><?= Html::a('<i class="fa fa-envelope"></i> Delivery Note',['/delevery-note/index'])?> </li>
+                        
+    <?else:?>
+                        <li><?= Html::a('<i class="fa fa-file"></i> Create Invoices',['/site/index'])?></li>
+                        <li><?= Html::a('<i class="fa fa-cart-plus"></i> Online Orders',['/order/index'])?> </li>
+                        <li><?= Html::a('<i class="fa fa-user-plus"></i> Add Customers',['/customer/index'])?></li>
+                        <li><?= Html::a('<i class="fa fa-envelope"></i> Delivery Note',['/delevery-note/index'])?> </li>
+                    
 
-                   
+    <?endif;?>
 
                   
 

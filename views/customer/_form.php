@@ -14,21 +14,15 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'Name')->textInput(['maxlength' => true]) ?>
 
+    <?= $form->field($model, 'Address')->textInput(['maxlength' => true]) ?>
+
     <?= $form->field($model, 'Email')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'Password')->passwordInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'NIC')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'Reemed_points')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'Earned-point')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'Point_balance')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'Mobile_No')->textInput(['maxlength' => true]) ?>
-
-    
+    <?= $form->field($model, 'User_type_Id')->textInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

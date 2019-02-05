@@ -201,7 +201,8 @@ $this->params['breadcrumbs'][] = $this->title;
         //alert(x)
         $.ajax({
             type: "POST",
-            url: "site/add",  //site/add
+            url: "http://localhost/basic/web/site/add",  //site/add
+           // url: "add", 
             data: {'id': x},
 
             success: function (data) {
@@ -220,7 +221,7 @@ $this->params['breadcrumbs'][] = $this->title;
     }
 
     function saveFunction() {
-        // alert("hit");
+        //alert("hit");
         var x = document.getElementById("mySelect").value;
         var quantity = document.getElementById("quantity").value;
         var discount = document.getElementById("discount").value;
@@ -234,7 +235,8 @@ $this->params['breadcrumbs'][] = $this->title;
         console.log(total)
         $.ajax({
             type: "POST",
-            url: "site/save",  //site/add
+            url:  "http://localhost/basic/web/site/save",
+           // url: "site/save",  //site/add
             data: {'id': x, 'quantity': quantity, 'discount': discount, 'total': total},
 
             success: function (data) {
@@ -263,11 +265,13 @@ $this->params['breadcrumbs'][] = $this->title;
     }
 
     function removeFunction() {
+       // alert('hit');
         var totalPrice = 0;
         var tblBody = "";
         $.ajax({
             type: "POST",
-            url: "site/remove",  //site/add
+       // url: "site/remove",
+            url: "http://localhost/basic/web/site/remove",  //site/add
             data: {},
 
             success: function (data) {
@@ -301,10 +305,11 @@ $this->params['breadcrumbs'][] = $this->title;
         let No_Of_Items = document.getElementById("nOfItem").value;
         let Paid = document.getElementById("Paid").value;
         let Balance = document.getElementById("Balance").value;
-        autoRefresh = false;
+       // autoRefresh = false;
         $.ajax({
             type: "POST",
-            url: "site/clear",
+           // url: "clear"
+            url: " http://localhost/basic/web/site/clear",
             data: {
                 'Cashier_Id': Customer_Id,
                 'Customer_Id': Cashier_Id,
@@ -318,7 +323,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 var data1 = JSON.parse(data);
 
                 if (data1.success) {
-                    // print
                     let doc = new jsPDF();
                     let elementHandler = {
                         '#tableToPrint': function (element, renderer) {
@@ -356,46 +360,46 @@ $this->params['breadcrumbs'][] = $this->title;
             },
             error: function (error) {
                 console.log(error)
-                autoRefresh = true;
+               // autoRefresh = true;
             },
-            statusCode: {}
+          //  statusCode: {}
         });
     }
 
-    let autoRefresh = true;
+   // let autoRefresh = true;
 
-    function refreshData() {
-        let tblBody = "";
-        let totalPrice = 0;
-        let nOfItem;
-        $.ajax({
-            type: "POST",
-            url: "site/refresh",
-            data: {},
-            success: function (data) {
-                if (autoRefresh) {
-                    let data1 = JSON.parse(data);
-                    console.log(data1)
-                    nOfItem = data1.length
-                    data1.forEach(function (item) {
-                        totalPrice += parseInt(item.Total)
-                        tblBody += '<tr><td></td><td>' + item.Id + '</td><td>' + item.Name + '</td><td>' + item.Discount + '</td><td>' + item.quantity + '</td><td>' + item.Total + '</td></tr>'
-                    });
-                    $('#myTable tbody').html(tblBody);
-                    document.getElementById("netAmount").value = totalPrice;
-                    document.getElementById("nOfItem").value = nOfItem;
-                }
-            },
-            error: function (error) {
-                console.log(error)
-            },
-            statusCode: {}
-        });
-    }
+    // function refreshData() {
+    //     let tblBody = "";
+    //     let totalPrice = 0;
+    //     let nOfItem;
+    //     $.ajax({
+    //         type: "POST",
+    //         url: "site/refresh",
+    //         data: {},
+    //         success: function (data) {
+    //             if (autoRefresh) {
+    //                 let data1 = JSON.parse(data);
+    //                 console.log(data1)
+    //                 nOfItem = data1.length
+    //                 data1.forEach(function (item) {
+    //                     totalPrice += parseInt(item.Total)
+    //                     tblBody += '<tr><td></td><td>' + item.Id + '</td><td>' + item.Name + '</td><td>' + item.Discount + '</td><td>' + item.quantity + '</td><td>' + item.Total + '</td></tr>'
+    //                 });
+    //                 $('#myTable tbody').html(tblBody);
+    //                 document.getElementById("netAmount").value = totalPrice;
+    //                 document.getElementById("nOfItem").value = nOfItem;
+    //             }
+    //         },
+    //         error: function (error) {
+    //             console.log(error)
+    //         },
+    //         statusCode: {}
+    //     });
+    // }
 
-    $(document).ready(function () {
-        setInterval(refreshData, 2000);
-    });
+    // $(document).ready(function () {
+    //     setInterval(refreshData, 2000);
+    // });
 
     function quantityPrice() {
         var quantity = document.getElementById("quantity").value;
@@ -428,7 +432,6 @@ $this->params['breadcrumbs'][] = $this->title;
     $("#paidInput").change(function () {
         alert("The text has been changed.");
     });
-    
-    
+
 
 </script>

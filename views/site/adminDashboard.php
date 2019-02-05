@@ -85,7 +85,7 @@ body {
   
   <div class="column">
     <div class="card bg-light" style="background-color:Tomato">
-      <i class="fa fa-shopping-cart" style="font-size:60px;color:black"></i>
+      <i class="fa fa-file-text" style="font-size:60px;color:black"></i>
       <p class="card-text"><h2><b>Shipment</b></h2></p>
       <?= Html::a('More info <i class="fa fa-arrow-circle-right"></i>', ['/shipment/index'], ['class'=>'small-box-footer']) ?>
     </div>
@@ -94,7 +94,7 @@ body {
   <div class="column">
     <div class="card bg-light" style="background-color:teal">
       <i class="fa fa-address-card" style="font-size:60px;color:black"></i>
-      <p class="card-text"><h2><b>User Management</b></h2></p>
+      <p class="card-text"><h2><b>Add Users</b></h2></p>
       <?= Html::a('More info <i class="fa fa-arrow-circle-right"></i>', ['/add-user/index'], ['class'=>'small-box-footer']) ?>
     </div>
   </div>
@@ -103,7 +103,7 @@ body {
 <div class="row">
 <div class="column">
     <div class="card bg-light" style="background-color:goldenrod">
-      <i class="fa fa-gift" style="font-size:60px;color:black"></i>
+      <i class="fa fa-shopping-cart" style="font-size:60px;color:black"></i>
       <p class="card-text"><h2><b>Add Item</b></h2></p>
       <?= Html::a('More info <i class="fa fa-arrow-circle-right"></i>', ['/add-user/index'], ['class'=>'small-box-footer']) ?>
     </div>
@@ -111,9 +111,9 @@ body {
 
   <div class="column">
     <div class="card bg-light" style="background-color:silver">
-      <i class="fa fa-envelope-open" style="font-size:60px;color:black"></i>
-      <p class="card-text"><h2><b>Delivery Note</b></h2></p>
-      <?= Html::a('More info <i class="fa fa-arrow-circle-right"></i>', ['delevery-note/index'], ['class'=>'small-box-footer']) ?>
+      <i class="fa fa-shopping-bag" style="font-size:60px;color:black"></i>
+      <p class="card-text"><h2><b>Item Categorize</b></h2></p>
+      <?= Html::a('More info <i class="fa fa-arrow-circle-right"></i>', ['/main-category/index'], ['class'=>'small-box-footer']) ?>
     </div>
   </div>
   
@@ -121,15 +121,15 @@ body {
     <div class="card bg-light" style="background-color:skyblue">
       <i class="fa fa-envelope-open" style="font-size:60px;color:black"></i>
       <p class="card-text"><h2><b>Delivery Note</b></h2></p>
-      <?= Html::a('More info <i class="fa fa-arrow-circle-right"></i>', ['delevery-note/index'], ['class'=>'small-box-footer']) ?>
+      <?= Html::a('More info <i class="fa fa-arrow-circle-right"></i>', ['/delevery-note/index'], ['class'=>'small-box-footer']) ?>
     </div>
   </div>
   
   <div class="column">
-    <div class="card">
-      <h3>Card 4</h3>
-      <p>Some text</p>
-      <p>Some text</p>
+    <div class="card bg-light" style="background-color:chocolate">
+      <i class="fa fa-gift" style="font-size:60px;color:black"></i>
+      <p class="card-text"><h2><b>Promotions</b></h2></p>
+      <?= Html::a('More info <i class="fa fa-arrow-circle-right"></i>', ['/delevery-note/index'], ['class'=>'small-box-footer']) ?>
     </div>
   </div>
 </div>

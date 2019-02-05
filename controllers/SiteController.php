@@ -74,11 +74,16 @@ class SiteController extends Controller
 
         if (!Yii::$app->user->isGuest) {
             // return $this->render('index');
+            if(Yii::$app->user->identity->id == 1){
+                return $this->render('adminDashboard');
+           
+            }else{
+                $list = Yii::$app->db->createCommand("select Id,Name,Price from product")->queryAll();
 
-            $list = Yii::$app->db->createCommand("select Id,Name,Price from product")->queryAll();
-
-            //return $this->render('cashierDashboard', ['list' => $list]);
-            return $this->render('adminDashboard');
+               // return $this->render('cashierDashboard', ['list' => $list,'productList'=>[]]);
+                return $this->render('cashierDashboard', ['list' => $list]);
+            }
+           // return $this->render('adminDashboard');
         } else {
             return $this->redirect(['/user-management/auth/login']);
         }
@@ -217,12 +222,7 @@ class SiteController extends Controller
                 $invoiceHasProduct->Discount = $item->Discount;
                 $invoiceHasProduct->Total = $item->Total;
                 $invoiceHasProduct->Quantity = $item->quantity;
-                if (!$invoiceHasProduct->save()) {
-                   $quan = ProductQty::model()->find("product_id =: $item->product_id");
-                    $quan->Available_Qty -= $item->quantity;
-                    $quan->save();
-                    return json_encode(['error' => $invoiceHasProduct->getErrors()]);
-                }
+               
                 ProductList::deleteAll();
             }
             return json_encode(['success' => true]);

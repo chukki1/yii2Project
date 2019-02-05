@@ -9,14 +9,15 @@ use Yii;
  *
  * @property int $Id
  * @property string $Name
+ * @property string $Address
  * @property string $Email
  * @property string $Password
  * @property string $NIC
- * @property string $Reemed_points
- * @property string $Earned-point
- * @property string $Point_balance
- * @property string $Mobile_No
  * @property int $User_type_Id
+ *
+ * @property UserType $userType
+ * @property Invoice[] $invoices
+ * @property Order[] $orders
  */
 class Customer extends \yii\db\ActiveRecord
 {
@@ -34,12 +35,13 @@ class Customer extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['Password', 'NIC', 'Reemed_points', 'Mobile_No', 'User_type_Id'], 'required'],
+            [['Name', 'Address', 'Password', 'NIC', 'User_type_Id'], 'required'],
             [['User_type_Id'], 'integer'],
-            [['Name', 'Email', 'Password', 'NIC', 'Reemed_points', 'Earned-point', 'Point_balance', 'Mobile_No'], 'string', 'max' => 45],
+            [['Name', 'Address', 'Email', 'Password', 'NIC'], 'string', 'max' => 45],
+            ['Email','email'],
             [['Password'], 'unique'],
             [['NIC'], 'unique'],
-            [['Mobile_No'], 'unique'],
+            [['User_type_Id'], 'exist', 'skipOnError' => true, 'targetClass' => UserType::className(), 'targetAttribute' => ['User_type_Id' => 'Id']],
         ];
     }
 
@@ -51,14 +53,35 @@ class Customer extends \yii\db\ActiveRecord
         return [
             'Id' => 'ID',
             'Name' => 'Name',
+            'Address' => 'Address',
             'Email' => 'Email',
             'Password' => 'Password',
             'NIC' => 'Nic',
-            'Reemed_points' => 'Reemed Points',
-            'Earned-point' => 'Earned Point',
-            'Point_balance' => 'Point Balance',
-            'Mobile_No' => 'Mobile  No',
             'User_type_Id' => 'User Type  ID',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUserType()
+    {
+        return $this->hasOne(UserType::className(), ['Id' => 'User_type_Id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getInvoices()
+    {
+        return $this->hasMany(Invoice::className(), ['Customer_Id' => 'Id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getOrders()
+    {
+        return $this->hasMany(Order::className(), ['Customer_Id' => 'Id']);
     }
 }

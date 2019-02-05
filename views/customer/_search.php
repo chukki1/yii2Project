@@ -19,19 +19,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'Name') ?>
 
+    <?= $form->field($model, 'Address') ?>
+
     <?= $form->field($model, 'Email') ?>
 
     <?= $form->field($model, 'Password') ?>
 
-    <?= $form->field($model, 'NIC') ?>
-
-    <?php // echo $form->field($model, 'Reemed_points') ?>
-
-    <?php // echo $form->field($model, 'Earned-point') ?>
-
-    <?php // echo $form->field($model, 'Point_balance') ?>
-
-    <?php // echo $form->field($model, 'Mobile_No') ?>
+    <?php // echo $form->field($model, 'NIC') ?>
 
     <?php // echo $form->field($model, 'User_type_Id') ?>
 

@@ -18,7 +18,7 @@ class CustomerSearch extends Customer
     {
         return [
             [['Id', 'User_type_Id'], 'integer'],
-            [['Name', 'Email', 'Password', 'NIC', 'Reemed_points', 'Earned-point', 'Point_balance', 'Mobile_No'], 'safe'],
+            [['Name', 'Address', 'Email', 'Password', 'NIC'], 'safe'],
         ];
     }
 
@@ -63,13 +63,10 @@ class CustomerSearch extends Customer
         ]);
 
         $query->andFilterWhere(['like', 'Name', $this->Name])
+            ->andFilterWhere(['like', 'Address', $this->Address])
             ->andFilterWhere(['like', 'Email', $this->Email])
             ->andFilterWhere(['like', 'Password', $this->Password])
-            ->andFilterWhere(['like', 'NIC', $this->NIC])
-            ->andFilterWhere(['like', 'Reemed_points', $this->Reemed_points])
-            //->andFilterWhere(['like', 'Earned-point', $this->Earned-point])
-            ->andFilterWhere(['like', 'Point_balance', $this->Point_balance])
-            ->andFilterWhere(['like', 'Mobile_No', $this->Mobile_No]);
+            ->andFilterWhere(['like', 'NIC', $this->NIC]);
 
         return $dataProvider;
     }

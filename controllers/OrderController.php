@@ -54,14 +54,11 @@ class OrderController extends Controller
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionView($ID, $Customer_Id)
-    {      $modelOrderDetails =new OrderDetails();
-       $model2 = OrderDetails::find()->where( 'Id'
-        )->One();
-      
-        return $this->render('view', [
-            'model' => $this->findModel($ID, $Customer_Id),
-            'modelOrderDetails'=>$model2,
-        ]);
+    {     
+        $list = Yii::$app->db->createCommand("select Id,Name,Price from product")->queryAll();
+        $productList = Yii::$app->db->createCommand("select Id,Name,Price from product")->queryAll();
+
+        return $this->render('site/cashierDashboard', ['list' => $list,'productList'=>$productList]);
     }
 
     /**
@@ -72,14 +69,13 @@ class OrderController extends Controller
     public function actionCreate()
     {
         $model = new Order();
-         $modelOrderDetails =new OrderDetails();
-        if ($model->load(Yii::$app->request->post()) &&$modelOrderDetails->load(Yii::$app->request->post()) && $model->save()&&$modelOrderDetails->save()) {
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'ID' => $model->ID, 'Customer_Id' => $model->Customer_Id]);
         }
 
         return $this->render('create', [
             'model' => $model,
-            'modelOrderDetails' =>$modelOrderDetails,
+            
         ]);
     }
 

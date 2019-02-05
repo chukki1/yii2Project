@@ -32,19 +32,10 @@
         }
 
         /* Create two columns/boxes that floats next to each other */
-        nav {
-            float: left;
-            width: 100%;
-            height: 60px; /* only for demonstration, should be removed */
-            background: white;
-            padding: 20px;
-        }
+       
 
         /* Style the list inside the menu */
-        nav ul {
-            list-style-type: none;
-            padding: 0;
-        }
+       
 
         /* Clear floats after the columns */
         section:after {
@@ -81,15 +72,17 @@
 
         .button {
             border-radius: 8px;
-            float: right;
-
             font-size: 20px;
             width: 200px;
-            background-color: blue;
-            border: 3px;
+            background-color:#2e8b57;
+            border:3px solid black;
             padding: 15px 15px 5px 5px;
+            position:relative;
+            margin-top:30%;
+            color:black;
+            float:right;
         }
-
+        
         .form {
             float: left;
         }
@@ -107,7 +100,7 @@
 </head>
 <body>
 
-<h1><b>Master POS System</b></h1>
+
 <h1><b>Sales Report</b></h1>
 <header>
     <form>
@@ -122,8 +115,7 @@
 
 <section>
     <div id="container">
-        <div id="top">
-        </div>
+       
         <div id="tableToPrint">
             <table id="myTable">
                 <thead>
@@ -139,11 +131,15 @@
                 </tbody>
             </table>
         </div>
-
-        <button onclick="getReportFunction()" class="button ">Submit</button>
-        <button class="button" onclick="printReport()">Print</button>
-
+     
+      
     </div>
+</section>
+
+
+<button onclick="getReportFunction()" class="button ">Submit</button>
+<button class="button" onclick="printReport()">Print</button>
+
 
     <script>
         function getReportFunction() {

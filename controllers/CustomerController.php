@@ -46,15 +46,14 @@ class CustomerController extends Controller
 
     /**
      * Displays a single Customer model.
-     * @param integer $Id
-     * @param integer $User_type_Id
+     * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($Id, $User_type_Id)
+    public function actionView($id)
     {
         return $this->render('view', [
-            'model' => $this->findModel($Id, $User_type_Id),
+            'model' => $this->findModel($id),
         ]);
     }
 
@@ -68,7 +67,7 @@ class CustomerController extends Controller
         $model = new Customer();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'Id' => $model->Id, 'User_type_Id' => $model->User_type_Id]);
+            return $this->redirect(['view', 'id' => $model->Id]);
         }
 
         return $this->render('create', [
@@ -79,17 +78,16 @@ class CustomerController extends Controller
     /**
      * Updates an existing Customer model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $Id
-     * @param integer $User_type_Id
+     * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($Id, $User_type_Id)
+    public function actionUpdate($id)
     {
-        $model = $this->findModel($Id, $User_type_Id);
+        $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'Id' => $model->Id, 'User_type_Id' => $model->User_type_Id]);
+            return $this->redirect(['view', 'id' => $model->Id]);
         }
 
         return $this->render('update', [
@@ -100,14 +98,13 @@ class CustomerController extends Controller
     /**
      * Deletes an existing Customer model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $Id
-     * @param integer $User_type_Id
+     * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($Id, $User_type_Id)
+    public function actionDelete($id)
     {
-        $this->findModel($Id, $User_type_Id)->delete();
+        $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }
@@ -115,14 +112,13 @@ class CustomerController extends Controller
     /**
      * Finds the Customer model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $Id
-     * @param integer $User_type_Id
+     * @param integer $id
      * @return Customer the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($Id, $User_type_Id)
+    protected function findModel($id)
     {
-        if (($model = Customer::findOne(['Id' => $Id, 'User_type_Id' => $User_type_Id])) !== null) {
+        if (($model = Customer::findOne($id)) !== null) {
             return $model;
         }
 

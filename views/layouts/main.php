@@ -28,7 +28,7 @@ AppAsset::register($this);
         height: 100%;
     }
     .sidebar{
-        height: auto;
+        height: 100%;
     }
     </style>
 </head>
@@ -67,7 +67,7 @@ AppAsset::register($this);
     NavBar::end();
     ?>
  
- <div id="content">
+<div id="content">
 <div class=row>
     <div id="sidebar">
     <div class=col-sm-2>
