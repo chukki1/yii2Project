@@ -81,7 +81,7 @@ class SiteController extends Controller
                 $list = Yii::$app->db->createCommand("select Id,Name,Price from product")->queryAll();
 
                // return $this->render('cashierDashboard', ['list' => $list,'productList'=>[]]);
-                return $this->render('cashierDashboard', ['list' => $list]);
+                return $this->render('cashierDashboard', ['list' => $list,'productList'=>[]]);
             }
            // return $this->render('adminDashboard');
         } else {
@@ -256,7 +256,8 @@ class SiteController extends Controller
 
         return json_encode(['result' => $result]);
     }
-
+    
+    
 
 }
 

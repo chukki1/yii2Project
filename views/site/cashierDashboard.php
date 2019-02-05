@@ -6,6 +6,7 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use yii\captcha\Captcha;
+use yii\helpers\Json;
 
 $this->title = 'CashierDashboard';
 $this->params['breadcrumbs'][] = $this->title;
@@ -433,5 +434,25 @@ $this->params['breadcrumbs'][] = $this->title;
         alert("The text has been changed.");
     });
 
+
+$(document).ready(function(){
+  var productList = <?= Json::encode($productList);?>;
+  var list = <?= Json::encode($list);?>;
+  
+  var tblBody = ""
+  console.log(productList)
+  console.log(list)
+       productList.forEach(function (item) {
+            
+            // var unitprice = document.getElementById('Price').value;
+        
+     
+            // console.log(unitprice )
+            // totalPrice += parseInt(item.Total)
+
+        tblBody += '<tr><td></td><td>' + item.Id + '</td><td>' + item.Name + '</td><td>' + item.Discount + '</td><td>' + item.Quantity + '</td><td>' + item.Total + '</td></tr>'
+    });
+$('#myTable tbody').html(tblBody);
+});
 
 </script>

@@ -56,9 +56,14 @@ class OrderController extends Controller
     public function actionView($ID, $Customer_Id)
     {     
         $list = Yii::$app->db->createCommand("select Id,Name,Price from product")->queryAll();
-        $productList = Yii::$app->db->createCommand("select Id,Name,Price from product")->queryAll();
-
-        return $this->render('site/cashierDashboard', ['list' => $list,'productList'=>$productList]);
+        
+        $productList = Yii::$app->db->createCommand("SELECT OD.* ,P.*
+            FROM order_details OD
+            inner join product P on P.Name = OD.Product_Name
+            WHERE order_Id = $ID")->queryAll();
+        
+        // print_r($productList); die;
+        return $this->render('../site/cashierDashboard', ['list' => $list,'productList'=>$productList]);
     }
 
     /**
@@ -69,6 +74,7 @@ class OrderController extends Controller
     public function actionCreate()
     {
         $model = new Order();
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'ID' => $model->ID, 'Customer_Id' => $model->Customer_Id]);
         }

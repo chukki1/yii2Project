@@ -2,7 +2,6 @@
 
 namespace app\controllers;
 
-use app\models\Product;
 use Yii;
 use app\models\OrderDetails;
 use app\models\OrderDetailsSearch;
